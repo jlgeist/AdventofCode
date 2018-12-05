@@ -3,7 +3,6 @@ import re, numpy as np
 fabric = np.empty((1000, 1000))
 answer1 = 0
 answer2 = 0
-safe = 0
 
 with open('input.txt', 'r') as lines:  
     for line in lines:
@@ -23,7 +22,7 @@ with open('input.txt', 'r') as lines:
 
 with open('input.txt', 'r') as lines:  
     for line in lines:
-        safe = 1
+        safe = True
         i = int(re.search('#(.*) @', line).group(1))
         x = int(re.search('@ (.*),', line).group(1))
         y = int(re.search(',(.*):', line).group(1))
@@ -33,12 +32,12 @@ with open('input.txt', 'r') as lines:
         for a in range(x, x+w):
             for b in range(y, y+h):
                 if fabric[a][b] != i:
-                    safe-=1
+                    safe = False
                     break
-
-        if safe == 1:
+        if safe:
             answer2 = i
             break
 
+print(answer1)
 print(answer2)
 
